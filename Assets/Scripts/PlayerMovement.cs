@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed = 5f;
@@ -78,27 +78,31 @@ public class PlayerController : MonoBehaviour
 
     private void StateHandler()
     {
-        // Check if the crouch key is pressed or if there’s an obstruction above
-        if (grounded && (inputManager.IsCrouchPressed() || !CanStandUp()))
+        // Check if there's enough space to stand up
+        bool canStand = CanStandUp();
+
+        // Crouch state: stay crouched if crouch key is pressed or if there's an obstruction above
+        if (grounded && (inputManager.IsCrouchPressed() || !canStand))
         {
-            // Remain in crouch state if crouch key is pressed or there's no space to stand up
             state = MovementState.crouching;
             moveSpeed = crouchSpeed;
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
         }
-        // Transition to sprinting state only if grounded, crouch key is released, and there's space to stand
-        else if (grounded && inputManager.IsSprintPressed() && CanStandUp())
+        // Transition to sprinting or walking state if crouch key is released and there's space to stand
+        else if (grounded && canStand)
         {
-            state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
-            AdjustPlayerScale();
-        }
-        // Walking state: transition if grounded, crouch key is released, and enough space to stand
-        else if (grounded && CanStandUp())
-        {
-            state = MovementState.walking;
-            moveSpeed = walkSpeed;
-            AdjustPlayerScale();
+            if (inputManager.IsSprintPressed())
+            {
+                state = MovementState.sprinting;
+                moveSpeed = sprintSpeed;
+            }
+            else
+            {
+                state = MovementState.walking;
+                moveSpeed = walkSpeed;
+            }
+
+            AdjustPlayerScale(); // Smoothly transition back to normal scale
         }
         // Air state: when the player is not grounded
         else
@@ -106,7 +110,6 @@ public class PlayerController : MonoBehaviour
             state = MovementState.air;
         }
     }
-
 
     private void PlayerMove()
     {
@@ -142,14 +145,17 @@ public class PlayerController : MonoBehaviour
 
     private bool CanStandUp()
     {
-        float standUpCheckDistance = startYScale - crouchYScale + 0.1f;
+        // Calculate the standing check distance
+        float standUpCheckDistance = startYScale - crouchYScale + 0.1f; // Adding a small buffer for safety
+
+        // Cast a ray from the player's position upwards
         Vector3 checkPosition = transform.position + Vector3.up * crouchYScale;
         return !Physics.Raycast(checkPosition, Vector3.up, standUpCheckDistance, Ground);
     }
 
     private void AdjustPlayerScale()
     {
-        // Smoothly transition to standing if possible
+        // Smoothly transition back to original height if allowed
         transform.localScale = Vector3.Lerp(transform.localScale,
             new Vector3(transform.localScale.x, startYScale, transform.localScale.z), Time.deltaTime * 10f);
     }
