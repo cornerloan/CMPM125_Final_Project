@@ -17,7 +17,7 @@ public class PlayerCam : MonoBehaviour
     private void Update()
     {
         // Get mouse input from InputManager
-        Vector2 mouseInput = inputManager.GetMouseInput();
+        Vector2 mouseInput = inputManager.GetMouseInput() * Time.deltaTime;
         yRotation += mouseInput.x;
         xRotation -= mouseInput.y;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);

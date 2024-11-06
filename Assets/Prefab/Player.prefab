@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 471269033441936387}
   - component: {fileID: 7524763008495362243}
   - component: {fileID: 5244076935409148919}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,8 +117,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5722174640909738680}
   - component: {fileID: 8555652386349171015}
-  - component: {fileID: 8683876994953760788}
-  m_Layer: 8
+  - component: {fileID: 5363121010084939923}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 3481003358893022263}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.93441, y: -7.880136, z: -81.28055}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -171,7 +171,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &8683876994953760788
+--- !u!114 &5363121010084939923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,20 +180,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3481003358893022263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cbd5aa28d93f6d49ace7754740d9f1d, type: 3}
+  m_Script: {fileID: 11500000, guid: 785b913e39cc1884888a5a2f0dd32b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  walkSpeed: 3
-  sprintSpeed: 5
+  moveSpeed: 4
+  walkSpeed: 4
+  sprintSpeed: 7
   crouchSpeed: 1.5
   groundDrag: 5
   airDrag: 1
   jumpForce: 6
   jumpCoolDown: 0.2
-  airMultiplier: 0.25
+  airMultiplier: 0.5
   crouchYScale: 0.5
-  groundCheckRadius: 0.49
+  groundCheckRadius: 0.47
   groundCheck: {fileID: 3992244719749328534}
   Ground:
     serializedVersion: 2
@@ -210,7 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3683438595350253676}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7438659470276530779}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: CamPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3992244719749328534}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 7532542963504341255}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.538, z: 0}
+  m_LocalPosition: {x: 0, y: -0.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
