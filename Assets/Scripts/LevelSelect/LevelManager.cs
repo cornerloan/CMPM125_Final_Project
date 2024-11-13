@@ -1,14 +1,12 @@
-using System.Diagnostics;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.HID;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private GameObject[] levels;
     private Transform level;
-    private RaycastHit hit; 
+    private RaycastHit hit;
 
     private void Update()
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.ProBuilder;
+
 
 // Credits/Resource for mesh generation:
 // https://youtu.be/-3ekimUWb9I?feature=shared
@@ -10,13 +10,22 @@ using UnityEngine.ProBuilder;
 [RequireComponent(typeof(MeshFilter))]
 public class MeshGenerator : MonoBehaviour
 {
+    public enum MeshStyle
+    {
+        sine,
+        ripple
+    }
+
     private Mesh mesh;
     private MeshFilter meshFilter;
     private bool hasBoxCollider = false;
 
 
-    [SerializeField] private Vector2 planeSize = new Vector2(1,1);
-    [SerializeField] private int planeResolution = 1;
+
+    [SerializeField] public Vector2 planeSize = new Vector2(1,1);
+    [SerializeField] public int planeResolution = 1;
+    [SerializeField] public MeshStyle meshStyle;
+    
 
     private List<Vector3> vertices;
     private List<int> triangles;
@@ -34,7 +43,13 @@ public class MeshGenerator : MonoBehaviour
         planeResolution = Mathf.Clamp(planeResolution, 1, 50);
 
         GeneratePlane(planeSize, planeResolution);
-        SineWave(Time.timeSinceLevelLoad);
+        if (meshStyle == MeshStyle.sine)
+        {
+            SineWave(Time.timeSinceLevelLoad);
+        } else if (meshStyle == MeshStyle.ripple) 
+        {
+            Ripple(Time.timeSinceLevelLoad);
+        }
         AssignMesh();
 
         if (!hasBoxCollider)
@@ -96,6 +111,19 @@ public class MeshGenerator : MonoBehaviour
         {
             Vector3 vertex = vertices[i];
             vertex.y = Mathf.Sin(time + vertex.x) / 5;
+            vertices[i] = vertex;
+        }
+    }
+
+    private void Ripple(float time)
+    {
+        Vector3 origin = new Vector3(planeSize.x/2, 0, planeSize.y/2);
+
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            Vector3 vertex = vertices[i];
+            float distance = (vertex - origin).magnitude;
+            vertex.y = Mathf.Sin(time + distance);
             vertices[i] = vertex;
         }
     }
