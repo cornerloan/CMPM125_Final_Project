@@ -7,20 +7,22 @@ public class ObjectPosition : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private Vector3 position1;
     [SerializeField] private Vector3 position2;
+    [SerializeField] private Transform player; 
+    [SerializeField] private float playerDistanceThreshold = 2f;
+
     private bool shouldMoveTo2;
     private bool visible;
 
-    // Start is called before the first frame update
     void Start()
     {
         transform.position = position1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!visible)
         {
+            // move between positions
             if (shouldMoveTo2)
             {
                 transform.position = Vector3.MoveTowards(transform.position, position2, moveSpeed * Time.deltaTime);
@@ -31,7 +33,26 @@ public class ObjectPosition : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, position1, moveSpeed * Time.deltaTime);
                 if (transform.position == position1) shouldMoveTo2 = true;
             }
+
+            /**
+            // make the player a child of the moving platform, to keep the player on top
+            if (IsPlayerOnTop())
+            {
+                player.SetParent(transform); // Make the player a child of the object
+            }
+            else
+            {
+                player.SetParent(null); // Unparent the player
+            }
+            */
         }
+    }
+
+    private bool IsPlayerOnTop()
+    {
+        // if the player is above the object and within playerDistanceThreshold of the object
+        float distanceToObject = Vector3.Distance(player.position, transform.position);
+        return distanceToObject <= playerDistanceThreshold && player.position.y >= transform.position.y;
     }
 
     private void OnBecameVisible()
