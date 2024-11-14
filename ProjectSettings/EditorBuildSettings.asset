@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu Scenes/MainMenu.unity
+    guid: 9490ff53428a09448a72b9366cdfc74f
+  - enabled: 1
+    path: Assets/Scenes/Arno'sTestScene.unity
+    guid: c3f7716398cb1124dbcbde1cf9cb0a35
   m_configObjects:
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0c0b2e6364c1f79498d750c3ad6c7d79, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 94c4f4a826f767f4c9c3d59e13b59069, type: 2}

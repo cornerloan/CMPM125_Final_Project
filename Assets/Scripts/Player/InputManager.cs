@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
     public KeyCode jumpKey = KeyCode.Space;          // Key for jumping
     public KeyCode sprintKey = KeyCode.LeftShift;    // Key for sprinting
     public KeyCode crouchKey = KeyCode.LeftControl;  // Key for crouching
+    public KeyCode interactionKey = KeyCode.E; // Key for interacting
 
     [Header("Mouse Sensitivity")]
     public float sensitivityX = 100f; // Horizontal sensitivity
@@ -52,6 +53,14 @@ public class InputManager : MonoBehaviour
     public bool IsCrouchUp()
     {
         return Input.GetKeyUp(crouchKey);
+    }
+
+    /// <summary>
+    /// Checks if the interaction key is currently pressed.
+    /// </summary>
+    public bool IsInteractPressed()
+    {
+        return Input.GetKeyDown(interactionKey);
     }
 
     /// <summary>

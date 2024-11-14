@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Check")]
     public float groundCheckRadius = 0.4f;
     public Transform groundCheck;
-    public LayerMask Ground;
+    public LayerMask Ground; // Ensure this includes interactable layers
 
     public Transform orientation;
     public InputManager inputManager;
@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     private Vector3 moveDirection;
     private Rigidbody rb;
+
+    private Transform originalParent; // To store the player's original parent
+    private bool onMovingPlatform = false; // Track if the player is on a moving platform
 
     public MovementState state;
     public enum MovementState
@@ -45,28 +48,84 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
         canJump = true;
         startYScale = transform.localScale.y;
+
+        // Add Interactable layer to Ground mask programmatically
+        Ground |= (1 << LayerMask.NameToLayer("Interactable"));
     }
 
     private void Update()
     {
-        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, Ground);
-
-        PlayerInput();
-        SpeedControl();
-        StateHandler();
-
-        rb.drag = grounded ? groundDrag : airDrag;
+        HandleInput();
+        ControlDrag();
     }
 
     private void FixedUpdate()
     {
-        PlayerMove();
+        UpdateGroundedStatus(); // Update grounded status with each physics update
+
+        if (grounded || moveDirection.magnitude > 0.1f)
+        {
+            MovePlayer();
+        }
     }
 
-    private void PlayerInput()
+    // Improved ground check that includes platform parenting
+    private void UpdateGroundedStatus()
+    {
+        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, Ground);
+
+        // Unparent the player if they’re no longer grounded
+        if (!grounded && transform.parent != originalParent)
+        {
+            transform.parent = originalParent;
+            onMovingPlatform = false; // Not on a platform anymore
+        }
+
+        // If the CheckSphere fails, use a raycast to further confirm grounding
+        if (!grounded)
+        {
+            RaycastHit hit;
+            float rayLength = groundCheckRadius + 0.1f;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength, Ground))
+            {
+                grounded = true;
+
+                // If the player is standing on a moving platform
+                if (hit.collider.GetComponent<ElevatorController>() != null)
+                {
+                    if (transform.parent != hit.collider.transform)
+                    {
+                        originalParent = transform.parent; // Save the current parent
+                        transform.parent = hit.collider.transform; // Parent the player to the elevator
+                    }
+                    onMovingPlatform = true; // Indicate player is on a platform
+                }
+                else if (transform.parent != originalParent)
+                {
+                    // If stepping off the elevator, unparent and reset the state
+                    transform.parent = originalParent;
+                    onMovingPlatform = false;
+                }
+            }
+        }
+
+        // Ensure `grounded` stays true if player is on a moving platform
+        if (onMovingPlatform)
+        {
+            grounded = true;
+        }
+    }
+
+    private void HandleInput()
+    {
+        HandleJumpInput();
+        UpdateMovementState();
+    }
+
+    private void HandleJumpInput()
     {
         if (inputManager.IsJumpPressed() && canJump && grounded)
         {
@@ -76,42 +135,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StateHandler()
+    private void UpdateMovementState()
     {
-        // Check if there's enough space to stand up
         bool canStand = CanStandUp();
-
-        // Crouch state: stay crouched if crouch key is pressed or if there's an obstruction above
-        if (grounded && (inputManager.IsCrouchPressed() || !canStand))
+        if (grounded)
         {
-            state = MovementState.crouching;
-            moveSpeed = crouchSpeed;
-            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
-        }
-        // Transition to sprinting or walking state if crouch key is released and there's space to stand
-        else if (grounded && canStand)
-        {
-            if (inputManager.IsSprintPressed())
+            if (inputManager.IsCrouchPressed() || !canStand)
+            {
+                state = MovementState.crouching;
+                moveSpeed = crouchSpeed;
+                SetPlayerScale(crouchYScale);
+            }
+            else if (inputManager.IsSprintPressed())
             {
                 state = MovementState.sprinting;
                 moveSpeed = sprintSpeed;
+                AdjustPlayerScale();
             }
             else
             {
                 state = MovementState.walking;
                 moveSpeed = walkSpeed;
+                AdjustPlayerScale();
             }
-
-            AdjustPlayerScale(); // Smoothly transition back to normal scale
         }
-        // Air state: when the player is not grounded
         else
         {
             state = MovementState.air;
         }
     }
 
-    private void PlayerMove()
+    private void MovePlayer()
     {
         Vector2 input = inputManager.GetMovementInput();
         moveDirection = orientation.forward * input.y + orientation.right * input.x;
@@ -124,9 +178,16 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
+
+        LimitSpeed();
     }
 
-    private void SpeedControl()
+    private void ControlDrag()
+    {
+        rb.drag = grounded ? groundDrag : airDrag;
+    }
+
+    private void LimitSpeed()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -145,19 +206,20 @@ public class PlayerController : MonoBehaviour
 
     private bool CanStandUp()
     {
-        // Calculate the standing check distance
-        float standUpCheckDistance = startYScale - crouchYScale + 0.1f; // Adding a small buffer for safety
-
-        // Cast a ray from the player's position upwards
+        float standUpCheckDistance = startYScale - crouchYScale + 0.1f;
         Vector3 checkPosition = transform.position + Vector3.up * crouchYScale;
         return !Physics.Raycast(checkPosition, Vector3.up, standUpCheckDistance, Ground);
     }
 
     private void AdjustPlayerScale()
     {
-        // Smoothly transition back to original height if allowed
         transform.localScale = Vector3.Lerp(transform.localScale,
             new Vector3(transform.localScale.x, startYScale, transform.localScale.z), Time.deltaTime * 10f);
+    }
+
+    private void SetPlayerScale(float newYScale)
+    {
+        transform.localScale = new Vector3(transform.localScale.x, newYScale, transform.localScale.z);
     }
 
     private void ResetJump()

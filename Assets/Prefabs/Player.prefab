@@ -124,7 +124,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: aaf796a878ce369489a66d114d5475ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 5576201404217347763}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.65, z: 0}
+  m_LocalPosition: {x: 0, y: -0.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 3141898524049684757}
   - component: {fileID: 4280330035046010458}
   - component: {fileID: 7321106843790004437}
+  - component: {fileID: 1561245287452024784}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -227,7 +228,7 @@ Transform:
   m_GameObject: {fileID: 8051962728211876672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.93441, y: -7.880136, z: -81.28055}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -286,7 +287,7 @@ MonoBehaviour:
   jumpCoolDown: 0.2
   airMultiplier: 0.5
   crouchYScale: 0.5
-  groundCheckRadius: 0.4
+  groundCheckRadius: 0.47
   groundCheck: {fileID: 4413334984758559105}
   Ground:
     serializedVersion: 2
@@ -294,3 +295,20 @@ MonoBehaviour:
   orientation: {fileID: 5424325897368553550}
   inputManager: {fileID: 0}
   state: 0
+--- !u!114 &1561245287452024784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051962728211876672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d123dcd5a3f6e43880f239a00f3a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  inputManager: {fileID: 0}

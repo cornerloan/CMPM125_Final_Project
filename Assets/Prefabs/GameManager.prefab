@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4410339452123743007}
   - component: {fileID: 3470404185411435222}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: Input Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
+  interactionKey: 101
   sensitivityX: 200
   sensitivityY: 200
 --- !u!1 &6348385169784396620
