@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca7f13af00834c4eb5eaa1405a5d89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: Arno'sTestScene
+  gameSceneName: PrototypeScene
   optionsMenuAsset: {fileID: 0}
 --- !u!1 &2037874290
 GameObject:
