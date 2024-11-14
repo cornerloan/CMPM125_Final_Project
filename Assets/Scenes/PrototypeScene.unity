@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 59486635}
   - component: {fileID: 59486634}
   - component: {fileID: 59486633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Moving Platform Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1684,7 +1684,7 @@ GameObject:
   - component: {fileID: 365498867}
   - component: {fileID: 365498866}
   - component: {fileID: 365498871}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Growing Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2802,7 +2802,7 @@ GameObject:
   - component: {fileID: 623845908}
   - component: {fileID: 623845907}
   - component: {fileID: 623845906}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Moving Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2824,6 +2824,8 @@ MonoBehaviour:
   moveSpeed: 2
   position1: {x: -25, y: 0, z: -5}
   position2: {x: -50, y: 7, z: -30}
+  player: {fileID: 1524202179}
+  playerDistanceThreshold: 1
 --- !u!65 &623845907
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3201,7 +3203,7 @@ GameObject:
   - component: {fileID: 820245467}
   - component: {fileID: 820245466}
   - component: {fileID: 820245465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Moving Platform End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5658,6 +5660,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1524202179 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3141898524049684757, guid: ece6cb5ace139ef40848bd7e272f45bf, type: 3}
+  m_PrefabInstance: {fileID: 1393297476749982085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1673283101
 Mesh:
   m_ObjectHideFlags: 0
