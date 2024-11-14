@@ -12,7 +12,6 @@ public class MeshOutlineGenerator : MonoBehaviour
     [SerializeField] private GameObject mesh;
     private Mesh meshOutline;
     private MeshFilter meshOutlineFilter;
-    private bool hasBoxCollider = false;
 
 
     private Vector2 planeSize = new Vector2(1, 1);
@@ -45,12 +44,6 @@ public class MeshOutlineGenerator : MonoBehaviour
         GeneratePlane(planeSize, planeResolution);
         SineWave(Time.timeSinceLevelLoad);
         AssignMesh();
-
-        if (!hasBoxCollider)
-        {
-            gameObject.AddComponent<BoxCollider>();
-            hasBoxCollider = true;
-        }
     }
 
     private void GeneratePlane(Vector2 size, int resolution)
