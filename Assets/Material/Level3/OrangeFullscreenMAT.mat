@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlueFullscreenMAT
+  m_Name: OrangeFullscreenMAT
   m_Shader: {fileID: -6465566751694194690, guid: 30c2f7fd7dc55904f964a2d0fde45fe6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -43,5 +43,5 @@ Material:
     - _VignetteIntensity: 1.487
     - _VignettePower: 7
     m_Colors:
-    - _VignetteColor: {r: 0, g: 0.1333332, b: 1, a: 1}
+    - _VignetteColor: {r: 1, g: 0.4666667, b: 0, a: 1}
   m_BuildTextureStacks: []

@@ -17,7 +17,7 @@ public class Wall : MonoBehaviour
 
     private Collider thisCollider;
     private PlayerLevel3Mechanics player;
-    private void Start()
+    private void Awake()
     {
         thisCollider = GetComponent<Collider>();  
         player = playerObject.GetComponent<PlayerLevel3Mechanics>();
@@ -26,7 +26,7 @@ public class Wall : MonoBehaviour
     private void Update()
     {
         // sets the wall permeable if same state as player
-        if (player.playerState.ToString() != wallState.ToString()) 
+        if (player.playerState.ToString() == wallState.ToString()) 
         {
             thisCollider.isTrigger = true;
         } else
@@ -46,17 +46,9 @@ public class Wall : MonoBehaviour
         }
     }
 
-    // disable trigger (making wall impermeable), switch wall state, and switch player state;
+    // disable trigger (making wall impermeable), and switch player state;
     private void OnTriggerExit(Collider other)
     {
-        if (wallState == State.blue) 
-        {
-            wallState = State.orange;
-        } else
-        {
-            wallState = State.blue;
-        }
-
         if (player.playerState == PlayerLevel3Mechanics.State.blue)
         {
             player.SetPlayerState(PlayerLevel3Mechanics.State.orange);
