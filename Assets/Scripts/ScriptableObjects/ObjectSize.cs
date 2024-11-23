@@ -17,9 +17,14 @@ public class ObjectSize : MonoBehaviour
     private bool shouldGrow;
     private bool visible;
 
+    [SerializeField] private GameObject player;
+    //[SerializeField] private bool isOnTop = false;
+    [SerializeField] private bool notOnTop = true;
+
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         // Initialize size to minScale to start from the smallest size
         //transform.localScale = Vector3.one * minScale;
         if(growthAxis == "All"){
@@ -50,7 +55,14 @@ public class ObjectSize : MonoBehaviour
                 transform.localScale -= growthFactor * Time.deltaTime;
                 checkScale();
             }
-
+            /* Kinda works, should take out of final implementation if real solution found
+            if (isOnTop)
+            {
+                player.transform.position += transform.localScale;
+                player.transform.position += transform.position;
+                player.transform.position += new Vector3(0, 10f, 0);
+            }
+            */
         }
     }
 
@@ -83,6 +95,17 @@ public class ObjectSize : MonoBehaviour
                 transform.position.z
             );
         }
+        
+        do
+        {
+            if (!Physics.Raycast(player.transform.position, Vector3.down, out RaycastHit hitInfo1, Mathf.Infinity, groundLayer))
+            {
+                player.transform.position += new Vector3(0, 0.5f, 0);
+            }
+            else notOnTop = false;
+        } while (notOnTop);
+        notOnTop = true;
+        
     }
 
     private void OnBecameVisible()
@@ -98,4 +121,22 @@ public class ObjectSize : MonoBehaviour
         visible = false;
         Debug.Log("unseen");
     }
+
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.transform.position.y > transform.position.y)
+        {
+            isOnTop = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isOnTop = false;
+        }
+    }
+    */
 }
