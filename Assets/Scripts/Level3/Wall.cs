@@ -46,6 +46,11 @@ public class Wall : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
+
     // disable trigger (making wall impermeable), and switch player state;
     private void OnTriggerExit(Collider other)
     {
