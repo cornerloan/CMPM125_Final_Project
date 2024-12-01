@@ -6,8 +6,9 @@ public class QuantumElevator : MonoBehaviour
     public float moveHeight = 5f;     
 
     private Vector3 startPosition;    
-    private float oscillationTimer = 0f; 
+    private float oscillationTimer = 0f;
     private bool playerIsLooking = false;
+    private bool playerIsColliding = false;
 
     private Transform player;
 
@@ -34,8 +35,8 @@ public class QuantumElevator : MonoBehaviour
         // Check if the player is looking at the elevator
         playerIsLooking = IsPlayerLooking();
 
-        // Move the elevator unless the player is looking at it
-        if (!playerIsLooking)
+        // Move the elevator unless the player is looking at it and on it
+        if (!playerIsLooking && playerIsColliding == false)
         {
             MoveElevator();
         }
