@@ -2181,6 +2181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1935904533}
   - component: {fileID: 1935904534}
+  - component: {fileID: 1935904535}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -2217,6 +2218,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Levels:
   - PrototypeScene
+--- !u!114 &1935904535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935904531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98cde2fcecd585f4a8dabb53f6d47afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderFeatures:
+  - feature: {fileID: 7038564381864181984, guid: 50d6c61232b68a04885f05dd804f696b, type: 2}
+    isEnabled: 0
+  - feature: {fileID: 3063277336664530144, guid: 50d6c61232b68a04885f05dd804f696b, type: 2}
+    isEnabled: 0
+  pipelineAsset: {fileID: 11400000, guid: 48d30f01892ca284cbba682025105e75, type: 2}
 --- !u!1 &1956359078
 GameObject:
   m_ObjectHideFlags: 17
