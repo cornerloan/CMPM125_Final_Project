@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wireframe Material
+  m_Name: GroundWallMAT
   m_Shader: {fileID: -6465566751694194690, guid: 8f4a96097bd343e4b80d2475d062a15f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -23,7 +23,7 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _wireframe_image:
+    - _Texture2D:
         m_Texture: {fileID: 2800000, guid: ebf03d5465931774496bda9b6ff87625, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -43,11 +43,13 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WireframeThickness: 0.947
-    m_Colors:
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _WaveAmplitude: 4.18
+    - _WaveFrequency: 4.24
+    - _WaveSpeed: 10
+    - _WireframeThickness: 1
+    m_Colors: []
   m_BuildTextureStacks: []
---- !u!114 &9196121998539383967
+--- !u!114 &6202123768698448394
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

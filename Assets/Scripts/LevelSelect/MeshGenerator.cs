@@ -18,18 +18,18 @@ public class MeshGenerator : MonoBehaviour
 
     private Mesh mesh;
     private MeshFilter meshFilter;
-    private bool hasBoxCollider = false;
 
 
 
     [SerializeField] public Vector2 planeSize = new Vector2(1,1);
     [SerializeField] public int planeResolution = 1;
     [SerializeField] public MeshStyle meshStyle;
-    
+    [SerializeField] private bool CenterMesh;
 
     private List<Vector3> vertices;
     private List<int> triangles;
 
+   
 
     private void Awake()
     {
@@ -52,10 +52,9 @@ public class MeshGenerator : MonoBehaviour
         }
         AssignMesh();
 
-        if (!hasBoxCollider)
+        if (GetComponent<BoxCollider>() == null)
         {
             gameObject.AddComponent<BoxCollider>();
-            hasBoxCollider = true;
         }
     }
 
@@ -69,7 +68,13 @@ public class MeshGenerator : MonoBehaviour
         {
             for (int x = 0; x < resolution + 1; x++)
             {
-                vertices.Add(new Vector3(x * xPerStep, 0, y * yPerStep));
+                if (CenterMesh)
+                {
+                    vertices.Add(new Vector3(x * xPerStep - planeSize.x / 2, 0, y * yPerStep - planeSize.y / 2));
+                } else
+                {
+                    vertices.Add(new Vector3(x * xPerStep, 0, y * yPerStep));
+                }
             }
         }
 

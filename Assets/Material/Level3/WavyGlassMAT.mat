@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wireframe Material
-  m_Shader: {fileID: -6465566751694194690, guid: 8f4a96097bd343e4b80d2475d062a15f, type: 3}
+  m_Name: WavyGlassMAT
+  m_Shader: {fileID: -6465566751694194690, guid: 2df8821ba15c9474bbf03ae04666f442, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,10 +23,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _wireframe_image:
-        m_Texture: {fileID: 2800000, guid: ebf03d5465931774496bda9b6ff87625, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,13 +37,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 0.15
+    - _Amplitude: 0.1
+    - _DistortStrength: 0
+    - _Metallic: 1
+    - _NoiseScale: 1
+    - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _WireframeThickness: 0.947
+    - _ReflectionStrength: 1
+    - _Smoothness: 1
     m_Colors:
-    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _GlassColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 0}
+    - _GlassColor_1: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &9196121998539383967
+--- !u!114 &2538676464703910352
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
