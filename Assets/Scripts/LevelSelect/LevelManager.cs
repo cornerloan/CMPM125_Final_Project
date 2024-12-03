@@ -25,10 +25,10 @@ public class LevelManager : MonoBehaviour
                             SceneManager.LoadScene(Levels[0]);
                             break;
                         case "Level2":
-
+                            SceneManager.LoadScene(Levels[1]);
                             break;
                         case "Level3":
-
+                            SceneManager.LoadScene(Levels[2]);
                             break;
                         case "Level4":
 

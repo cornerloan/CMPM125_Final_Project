@@ -2224,7 +2224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Levels:
-  - PrototypeScene
+  - PlatformLevel
+  - SizeLevel
+  - Level3
 --- !u!114 &1935904535
 MonoBehaviour:
   m_ObjectHideFlags: 0
