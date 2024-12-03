@@ -2,22 +2,20 @@ using UnityEngine;
 
 public class QuantumElevator : MonoBehaviour
 {
-    public float moveSpeed = 2f;      
+    public float moveSpeed = 2f;       
     public float moveHeight = 5f;     
 
-    private Vector3 startPosition;    
+    private Vector3 startPosition;   
     private float oscillationTimer = 0f;
-    private bool playerIsLooking = false;
-    private bool playerIsColliding = false;
+    private bool playerIsLooking = false;  
+    private bool playerIsColliding = false; 
 
     private Transform player;
 
     private void Start()
     {
-        // Save the start position of the elevator
         startPosition = transform.position;
 
-        // Find the player object
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -35,8 +33,8 @@ public class QuantumElevator : MonoBehaviour
         // Check if the player is looking at the elevator
         playerIsLooking = IsPlayerLooking();
 
-        // Move the elevator unless the player is looking at it and on it
-        if (!playerIsLooking && playerIsColliding == false)
+        // Stop the elevator if the player is either looking at it or standing on it
+        if (!playerIsLooking && !playerIsColliding)
         {
             MoveElevator();
         }
@@ -70,11 +68,29 @@ public class QuantumElevator : MonoBehaviour
         // Increment the oscillation timer
         oscillationTimer += Time.deltaTime * moveSpeed;
 
-        // Calculate the new vertical position using a sine wave, constrained between original and max height
-        float offset = Mathf.Sin(oscillationTimer) * (moveHeight / 2f); // Scale oscillation to half of the height
-        float newY = startPosition.y + (moveHeight / 2f) + offset;      // Offset ensures movement stays within bounds
+        // Calculate the new vertical position using a sine wave, constrained between startPosition.y and startPosition.y + moveHeight
+        float offset = (Mathf.Sin(oscillationTimer) + 1) / 2; // Normalize sine wave output to range [0, 1]
+        float newY = Mathf.Lerp(startPosition.y, startPosition.y + moveHeight, offset); // Interpolate between start and max height
 
         // Apply the new position
         transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Set playerIsColliding to true when the player stands on the elevator
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerIsColliding = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Set playerIsColliding to false when the player leaves the elevator
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerIsColliding = false;
+        }
     }
 }

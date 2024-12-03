@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5274559996522179422}
   m_Layer: 10
   m_Name: QuantomElevator
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8d7d1cd83dd3b42909408f65b79885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  moveHeight: 2
+  moveSpeed: 0.5
+  moveHeight: 25
