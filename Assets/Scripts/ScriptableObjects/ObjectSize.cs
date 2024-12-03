@@ -9,7 +9,7 @@ public class ObjectSize : MonoBehaviour
     [SerializeField] private float maxScale;
     [SerializeField] private float hoverHeight = 0f; // Distance to keep above the ground
     [SerializeField] private LayerMask groundLayer;    // Layer mask for detecting ground
-    [SerializeField] private string growthAxis; //String to determine axis of growth Strings: All, Horizontal, Vertical
+    [SerializeField] private string growthAxis; //String to determine axis of growth Strings: All, X, Y, Z
 
     //[SerializeField] private GameObject child; Possible field used if each object has an empty parent as a pivot point
 
@@ -29,10 +29,12 @@ public class ObjectSize : MonoBehaviour
         //transform.localScale = Vector3.one * minScale;
         if(growthAxis == "All"){
             growthFactor = Vector3.one * growthRate;
-        }else if (growthAxis == "Horizontal"){
+        }else if (growthAxis == "X"){
             growthFactor = new Vector3 (growthRate,0f,0f);
-        }else if(growthAxis == "Vertical"){
+        }else if(growthAxis == "Y"){
             growthFactor = new Vector3 (0f,growthRate,0f);
+        }else if(growthAxis == "Z"){
+            growthFactor = new Vector3 (0f,0f,growthRate);
         }else{
             Debug.Log("Growth Axis not set to proper value");
             growthFactor = new Vector3 (0f,0f,0f);
@@ -68,14 +70,18 @@ public class ObjectSize : MonoBehaviour
 
     private void checkScale(){
         if(shouldGrow){
-            if(growthAxis == "Vertical"){
+            if(growthAxis == "Y"){
                 if (transform.localScale.y >= maxScale) shouldGrow = false;
+            }else if(growthAxis == "Z"){
+                if (transform.localScale.z >= maxScale) shouldGrow = false;
             }else{
                 if (transform.localScale.x >= maxScale) shouldGrow = false;
             }
         }else{
-            if(growthAxis == "Vertical"){
+            if(growthAxis == "Y"){
                 if (transform.localScale.y <= minScale) shouldGrow = true;
+            }else if(growthAxis == "Z"){
+                if (transform.localScale.z <= minScale) shouldGrow = true;
             }else{
                 if (transform.localScale.x <= minScale) shouldGrow = true;
             }
@@ -111,7 +117,7 @@ public class ObjectSize : MonoBehaviour
     private void OnBecameVisible()
     {
         visible = true;
-        Debug.Log("seen");
+        //Debug.Log("seen");
         // Ensure the object is hovering at hoverHeight above the ground
         AdjustHeightAboveGround();
     }
@@ -119,7 +125,7 @@ public class ObjectSize : MonoBehaviour
     private void OnBecameInvisible()
     {
         visible = false;
-        Debug.Log("unseen");
+        //Debug.Log("unseen");
     }
 
     /*

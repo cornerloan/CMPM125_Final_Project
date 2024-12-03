@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class ResetButton : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Transform child;
+    public GameObject[] children;
     [SerializeField] private String description;
 
     // Update is called once per frame
     public void Interact(){
-        child.transform.localScale = Vector3.one;
+        Debug.Log("click");
+        foreach( GameObject child in children )
+            child.transform.localScale = Vector3.one;
     }
 
     public string GetDescription(){
