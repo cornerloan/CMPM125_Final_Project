@@ -353,6 +353,7 @@ MonoBehaviour:
   planeSize: {x: 5, y: 5}
   planeResolution: 5
   meshStyle: 0
+  CenterMesh: 0
 --- !u!33 &209063068
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -466,6 +467,7 @@ MonoBehaviour:
   planeSize: {x: 5, y: 5}
   planeResolution: 5
   meshStyle: 0
+  CenterMesh: 0
 --- !u!33 &295722556
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -676,6 +678,7 @@ MonoBehaviour:
   planeSize: {x: 5, y: 5}
   planeResolution: 5
   meshStyle: 0
+  CenterMesh: 0
 --- !u!33 &532457158
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -822,6 +825,7 @@ MonoBehaviour:
   planeSize: {x: 5, y: 5}
   planeResolution: 5
   meshStyle: 0
+  CenterMesh: 0
 --- !u!33 &796590966
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -935,6 +939,7 @@ MonoBehaviour:
   planeSize: {x: 5, y: 5}
   planeResolution: 5
   meshStyle: 0
+  CenterMesh: 0
 --- !u!33 &871476755
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1473,6 +1478,7 @@ MonoBehaviour:
   planeSize: {x: 80, y: 45}
   planeResolution: 50
   meshStyle: 1
+  CenterMesh: 0
 --- !u!33 &1527660983
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1501,7 +1507,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f495049950f06c84fbbbaf317b324cd5, type: 2}
+  - {fileID: 2100000, guid: 981b56f79438d524296e0317ee5952fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2011,6 +2017,7 @@ MonoBehaviour:
   planeSize: {x: 5, y: 5}
   planeResolution: 5
   meshStyle: 0
+  CenterMesh: 0
 --- !u!33 &1755818322
 MeshFilter:
   m_ObjectHideFlags: 0
