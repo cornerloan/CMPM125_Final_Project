@@ -807,7 +807,7 @@ MonoBehaviour:
     isEnabled: 0
   - feature: {fileID: 3063277336664530144, guid: 50d6c61232b68a04885f05dd804f696b, type: 2}
     isEnabled: 0
-  pipelineAsset: {fileID: 0}
+  pipelineAsset: {fileID: 11400000, guid: 48d30f01892ca284cbba682025105e75, type: 2}
 --- !u!4 &198554953
 Transform:
   m_ObjectHideFlags: 0
