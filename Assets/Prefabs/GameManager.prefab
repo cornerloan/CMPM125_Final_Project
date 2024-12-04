@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshairDefault: {fileID: 0}
   crosshairInteract: {fileID: 0}
-  interactionRange: 5
+  interactionRange: 100
 --- !u!1 &6348385169784396620
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
     public InputManager inputManager;
 
     private bool canJump;
-    private bool grounded;
-    private Vector3 moveDirection;
+    public bool grounded;
+    public Vector3 moveDirection;
     private Rigidbody rb;
 
     private Transform originalParent; // To store the player's original parent
