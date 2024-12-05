@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void Update()
