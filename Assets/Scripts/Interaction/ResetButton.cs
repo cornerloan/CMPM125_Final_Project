@@ -12,7 +12,7 @@ public class ResetButton : MonoBehaviour, IInteractable
     public void Interact(){
         Debug.Log("click");
         foreach( GameObject child in children )
-            child.transform.localScale = Vector3.one;
+            child.transform.localScale = new Vector3(1f, .5f, 1f);
     }
 
     public string GetDescription(){
