@@ -53,7 +53,6 @@ public class MainMenuController : MonoBehaviour
     {
         if (optionsMenuAsset != null)
         {
-            // Load and display the options menu UXML, if defined
             VisualElement optionsMenu = optionsMenuAsset.CloneTree();
             mainMenuContainer.Add(optionsMenu);
         }
@@ -61,13 +60,11 @@ public class MainMenuController : MonoBehaviour
 
     private void ShowCredits()
     {
-        Debug.Log("Show credits screen here.");
-        // Code for opening credits screen (e.g., adding another UXML)
+        SceneManager.LoadScene("CreditsMenu");
     }
 
     private void QuitGame()
     {
         Debug.Log("Quitting game...");
-        Application.Quit();
     }
 }

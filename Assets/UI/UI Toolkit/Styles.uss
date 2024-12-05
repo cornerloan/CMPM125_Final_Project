@@ -28,3 +28,11 @@
     background-color: rgb(59, 62, 64);
     color: rgb(255, 255, 255);
 }
+
+.credits-text {
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    -unity-font: url("project://database/Assets/Fonts/retrograde/Retrograde.ttf?fileID=12800000&guid=1b7349ecfb15b94478e73dd8fc166c32&type=3#Retrograde");
+    -unity-font-definition: url("project://database/Assets/Fonts/retrograde/Retrograde%20SDF.asset?fileID=11400000&guid=304c09d61b40e764e8cdcbc5b401eaea&type=2#Retrograde SDF");
+    margin-bottom: 20px;
+}
