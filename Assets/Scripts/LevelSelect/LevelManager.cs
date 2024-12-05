@@ -8,6 +8,11 @@ public class LevelManager : MonoBehaviour
     private Transform level;
     private RaycastHit hit;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
