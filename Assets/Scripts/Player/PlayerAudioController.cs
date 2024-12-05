@@ -54,7 +54,12 @@ public class PlayerAudioController : MonoBehaviour
     private void HandleFootsteps()
     {
         // Only play footsteps when grounded and moving
-        if (!playerController.grounded || playerController.moveDirection.magnitude <= 0.1f) return;
+        if (!playerController.grounded || !IsPlayerMoving())
+        {
+            // Reset the last footstep position to prevent sound spamming when standing still
+            lastFootstepPosition = playerController.transform.position;
+            return;
+        }
 
         // Check the distance traveled since the last footstep
         float distanceTraveled = Vector3.Distance(playerController.transform.position, lastFootstepPosition);
@@ -64,6 +69,13 @@ public class PlayerAudioController : MonoBehaviour
             PlayFootstepSound();
             lastFootstepPosition = playerController.transform.position; // Update the last footstep position
         }
+    }
+
+    private bool IsPlayerMoving()
+    {
+        // Check if the player is moving by combining movement direction magnitude and position checks
+        return playerController.moveDirection.magnitude > 0.1f &&
+               Vector3.Distance(playerController.transform.position, lastFootstepPosition) > 0.01f;
     }
 
     private void PlayFootstepSound()
@@ -79,18 +91,24 @@ public class PlayerAudioController : MonoBehaviour
         }
     }
 
+
+
     private void HandleJumpAndLanding()
     {
         // Play landing sound when transitioning from air to grounded
         if (!wasGrounded && playerController.grounded)
         {
-            PlaySound(landSFX);
+            if (!audioSource.isPlaying)
+            {
+                PlaySound(landSFX);
+                Debug.Log("land");
+            }
         }
 
         // Play jump sound immediately when SPACE is pressed
         if (inputManager.IsJumpPressed() && playerController.grounded)
         {
-            PlaySound(jumpSFX);
+            if (!audioSource.isPlaying) { PlaySound(jumpSFX); Debug.Log("jump"); }
         }
 
         wasGrounded = playerController.grounded;
@@ -101,7 +119,7 @@ public class PlayerAudioController : MonoBehaviour
         // Play interaction sound when the interaction key (e.g., E) is pressed
         if (inputManager.IsInteractPressed())
         {
-            PlaySound(interactSFX);
+            if (!audioSource.isPlaying) PlaySound(interactSFX);
         }
     }
 

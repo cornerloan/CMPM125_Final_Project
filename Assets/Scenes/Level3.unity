@@ -11693,6 +11693,14 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1498390918}
+    - target: {fileID: 7537961508222608158, guid: ece6cb5ace139ef40848bd7e272f45bf, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 1498390918}
+    - target: {fileID: 7537961508222608158, guid: ece6cb5ace139ef40848bd7e272f45bf, type: 3}
+      propertyPath: stepDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8051962728211876672, guid: ece6cb5ace139ef40848bd7e272f45bf, type: 3}
       propertyPath: m_Name
       value: Player
